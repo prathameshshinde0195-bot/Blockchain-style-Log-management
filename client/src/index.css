@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0a0a0f;
+    color: #e2e8f0;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .block-card {
+    @apply relative bg-[#111118] border rounded-lg p-4 transition-all duration-300;
+  }
+  .hash-text {
+    font-family: 'JetBrains Mono', monospace;
+    @apply text-xs tracking-tight;
+  }
+  .chain-connector {
+    @apply flex flex-col items-center;
+  }
+  .chain-line {
+    @apply w-px bg-gradient-to-b from-transparent via-slate-600 to-transparent;
+    height: 32px;
+  }
+  .chain-icon {
+    @apply text-slate-500 text-sm;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb { background: #2d2d3d; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3d3d5d; }
+
+/* Glow animations */
+@keyframes blockIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.block-animate {
+  animation: blockIn 0.4s ease-out forwards;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 4px currentColor; }
+  50% { box-shadow: 0 0 16px currentColor; }
+}
+
+.glow-pulse {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
