@@ -4,15 +4,15 @@
 
 @layer base {
   body {
-    background-color: #0a0a0f;
-    color: #e2e8f0;
+    background-color: #f7f9fc; /* Light silver/off-white background */
+    color: #334155; /* Dark grey/slate for text instead of black */
     font-family: 'IBM Plex Sans', sans-serif;
   }
 }
 
 @layer components {
   .block-card {
-    @apply relative bg-[#111118] border rounded-lg p-4 transition-all duration-300;
+    @apply relative bg-white border border-silver rounded-xl p-6 shadow-sm transition-all duration-300;
   }
   .hash-text {
     font-family: 'JetBrains Mono', monospace;
@@ -22,35 +22,35 @@
     @apply flex flex-col items-center;
   }
   .chain-line {
-    @apply w-px bg-gradient-to-b from-transparent via-slate-600 to-transparent;
-    height: 32px;
+    @apply w-0.5 bg-gradient-to-b from-transparent via-silver-dark to-transparent;
+    height: 48px;
   }
   .chain-icon {
-    @apply text-slate-500 text-sm;
+    @apply text-silver-dark text-sm;
   }
 }
 
 /* Scrollbar styling */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0a0a0f; }
-::-webkit-scrollbar-thumb { background: #2d2d3d; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #3d3d5d; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
 /* Glow animations */
 @keyframes blockIn {
-  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .block-animate {
-  animation: blockIn 0.4s ease-out forwards;
+  animation: blockIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 4px currentColor; }
-  50% { box-shadow: 0 0 16px currentColor; }
+  0%, 100% { box-shadow: 0 0 10px rgba(0, 206, 209, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(139, 92, 246, 0.4); }
 }
 
 .glow-pulse {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 3s ease-in-out infinite;
 }

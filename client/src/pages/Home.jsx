@@ -60,36 +60,36 @@ export default function Home() {
     : blocks.filter(b => b.data?.level === filter)
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f]">
+    <div className="min-h-screen bg-silver-light">
       <Toaster
         position="top-right"
         toastOptions={{
-          style: { background: '#1a1a2e', color: '#e2e8f0', border: '1px solid rgba(255,255,255,0.1)' }
+          style: { background: '#ffffff', color: '#1e293b', border: '1px solid #e5e7eb' }
         }}
       />
 
       {/* Header */}
-      <header className="border-b border-white/5 bg-[#0d0d16]/80 backdrop-blur sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <header className="border-b border-silver bg-white/80 backdrop-blur sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-2xl">⛓</span>
+            <span className="text-3xl">⛓</span>
             <div>
-              <h1 className="hash-text text-white font-bold text-lg tracking-tight">BlockLog</h1>
-              <p className="text-[10px] text-slate-600">Blockchain-Style Log Management</p>
+              <h1 className="hash-text text-purple-dark font-extrabold text-xl tracking-tight">BlockLog</h1>
+              <p className="text-[10px] text-silver-dark font-bold uppercase tracking-wider">Blockchain-Style Log Management</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="hash-text text-xs text-slate-500">MongoDB Connected</span>
+          <div className="flex items-center gap-2 px-3 py-1 bg-white rounded-full border border-silver shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
+            <span className="hash-text text-xs text-silver-dark font-medium">Network Secured</span>
           </div>
         </div>
       </header>
 
       {/* Main layout */}
-      <div className="max-w-7xl mx-auto px-6 py-8 flex gap-6">
+      <div className="max-w-7xl mx-auto px-6 py-10 flex gap-8">
 
         {/* Left sidebar */}
-        <aside className="w-72 shrink-0 flex flex-col gap-4 sticky top-24 self-start">
+        <aside className="w-80 shrink-0 flex flex-col gap-6 sticky top-28 self-start">
           <AddLogForm onLogAdded={handleLogAdded} />
           <ChainVerifier />
           <Dashboard blocks={blocks} />
@@ -98,23 +98,29 @@ export default function Home() {
         {/* Main chain view */}
         <main className="flex-1 min-w-0">
           {/* Filter bar */}
-          <div className="flex items-center gap-2 mb-6 flex-wrap">
-            <span className="text-xs text-slate-600 mr-1">Filter:</span>
-            {LEVELS.map(lvl => (
-              <button
-                key={lvl}
-                onClick={() => setFilter(lvl)}
-                className={`hash-text text-xs px-3 py-1 rounded border transition-all ${
-                  filter === lvl
-                    ? FILTER_STYLES[lvl]
-                    : 'text-slate-600 border-slate-800 hover:border-slate-600'
-                }`}
-              >
-                {lvl}
-              </button>
-            ))}
-            <span className="ml-auto hash-text text-xs text-slate-600">
-              {filteredBlocks.length} block{filteredBlocks.length !== 1 ? 's' : ''}
+          <div className="flex items-center gap-3 mb-8 bg-white p-3 rounded-lg border border-silver shadow-sm">
+            <span className="text-xs text-silver-dark font-bold px-2 uppercase">Filter</span>
+            <div className="flex items-center gap-2">
+              {LEVELS.map(lvl => (
+                <button
+                  key={lvl}
+                  onClick={() => setFilter(lvl)}
+                  className={`hash-text text-xs px-4 py-1.5 rounded-md border font-bold transition-all ${
+                    filter === lvl
+                      ? (lvl === 'INFO' ? 'text-cyan-dark border-cyan bg-cyan-light' : 
+                         lvl === 'WARN' ? 'text-golden-dark border-golden bg-golden-light' :
+                         lvl === 'ERROR' ? 'text-purple-dark border-purple bg-purple-light' :
+                         lvl === 'DEBUG' ? 'text-silver-dark border-silver bg-silver-light' :
+                         'text-purple-dark border-purple bg-purple-light')
+                      : 'text-silver-dark border-silver hover:border-cyan hover:text-cyan-dark'
+                  }`}
+                >
+                  {lvl}
+                </button>
+              ))}
+            </div>
+            <span className="ml-auto hash-text text-xs text-silver-dark font-medium px-2">
+              Showing {filteredBlocks.length} records
             </span>
           </div>
 

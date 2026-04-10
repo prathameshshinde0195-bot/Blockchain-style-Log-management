@@ -19,39 +19,47 @@ export default function ChainVerifier() {
   }
 
   return (
-    <div className="bg-[#111118] border border-white/10 rounded-xl p-5">
-      <h2 className="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
-        <span className="text-purple-400">✦</span> Chain Integrity
+    <div className="bg-white border border-silver rounded-xl p-6 shadow-sm">
+      <h2 className="text-sm font-extrabold text-purple-dark mb-5 flex items-center gap-2 uppercase tracking-tight">
+        <span className="text-purple text-lg">✦</span> Integrity Status
       </h2>
 
       <button
         onClick={verify}
         disabled={loading}
-        className="w-full py-2.5 rounded-lg border border-purple-500/40 bg-purple-500/10 hover:bg-purple-500/20 disabled:opacity-50 text-purple-300 text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+        className="w-full py-3 rounded-xl border-2 border-purple/20 bg-purple-light/30 hover:bg-purple-light/50 disabled:opacity-50 text-purple-dark text-xs font-extrabold uppercase tracking-widest transition-all flex items-center justify-center gap-3"
       >
         {loading ? (
           <>
-            <span className="w-4 h-4 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
-            Verifying...
+            <span className="w-4 h-4 border-2 border-purple border-t-transparent rounded-full animate-spin" />
+            Scanning...
           </>
         ) : (
-          '🔍 Verify Chain'
+          <>
+            <span className="text-lg">🔍</span>
+            <span>Verify Chain</span>
+          </>
         )}
       </button>
 
       {result && (
-        <div className={`mt-4 p-3 rounded-lg border text-sm ${
+        <div className={`mt-5 p-4 rounded-xl border-2 shadow-sm animate-in fade-in slide-in-from-top-2 duration-300 ${
           result.valid
-            ? 'bg-green-500/10 border-green-500/30 text-green-300'
-            : 'bg-red-500/10 border-red-500/30 text-red-300'
+            ? 'bg-cyan-light/30 border-cyan/30 text-cyan-dark'
+            : 'bg-purple-light/40 border-purple/30 text-purple-dark'
         }`}>
-          <div className="flex items-center gap-2 font-semibold mb-1">
-            {result.valid ? '✅ Chain is Valid' : '❌ Chain Tampered'}
+          <div className="flex items-center gap-3 font-extrabold mb-2 uppercase tracking-tight text-xs">
+            {result.valid ? (
+              <span className="bg-cyan text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]">✓</span>
+            ) : (
+              <span className="bg-purple text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]">✕</span>
+            )}
+            {result.valid ? 'Chain Integrity Intact' : 'Tamper Detected'}
           </div>
-          <p className="text-xs opacity-80">
+          <p className="text-[11px] font-bold opacity-70 leading-relaxed">
             {result.valid
-              ? `${result.totalBlocks} blocks verified successfully`
-              : result.reason || `Broken at block #${result.brokenAt}`}
+              ? `Cryptographic proof confirmed for ${result.totalBlocks} blocks.`
+              : result.reason || `Inconsistency found at block sequence #${result.brokenAt}`}
           </p>
         </div>
       )}

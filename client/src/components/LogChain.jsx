@@ -10,18 +10,18 @@ export default function LogChain({ blocks, loading, onDelete }) {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-64 gap-3">
-        <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-        <p className="hash-text text-slate-500">Loading chain...</p>
+      <div className="flex flex-col items-center justify-center h-96 gap-4">
+        <div className="w-12 h-12 border-4 border-cyan border-t-purple rounded-full animate-spin shadow-lg shadow-cyan/10" />
+        <p className="hash-text text-silver-dark font-extrabold uppercase tracking-widest text-xs">Synchronizing Chain...</p>
       </div>
     )
   }
 
   if (!blocks || blocks.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-64 gap-2 text-slate-600">
-        <span className="text-4xl">⛓</span>
-        <p className="hash-text">No blocks in chain</p>
+      <div className="flex flex-col items-center justify-center h-96 gap-4 text-silver-dark bg-white border border-silver rounded-xl shadow-inner">
+        <span className="text-6xl grayscale opacity-20">⛓</span>
+        <p className="hash-text font-bold uppercase tracking-widest text-xs">Genesis Block Pending...</p>
       </div>
     )
   }
